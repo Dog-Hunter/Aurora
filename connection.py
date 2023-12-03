@@ -6,6 +6,7 @@ class Connection:
         self.host = host
         self.port = port
 
+
 class ServerConnection(Connection):
     def __init__(self, host='127.0.0.1', port=32000):
         super().__init__(host, port)
@@ -20,6 +21,7 @@ class ServerConnection(Connection):
                 while True:
                     data = conn.recv(1024)
 
+
 class ClientConnection(Connection):
     def __init__(self, host, port=32000):
         super().__init__(host, port)
@@ -27,3 +29,19 @@ class ClientConnection(Connection):
     def create_client(self):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((self.host, self.port))
+
+
+class ServerConnectionFactory:
+    def __init__(self):
+        pass
+
+    def create_ServerConnection(self, host, port):
+        return ServerConnection(host, port)
+
+
+class ClientConnectionFactory:
+    def __init__(self):
+        pass
+
+    def create_ClientConnection(self, host, port):
+        return ClientConnection(host, port)
